@@ -8,23 +8,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.example.freedomsample.navigation.Router
 import com.example.freedomsample.tabs.model.BottomBarScreen
 
-fun NavGraphBuilder.paymentsScreen(
-    router: Router
-) {
+fun NavGraphBuilder.paymentsScreen() {
     composable(route = BottomBarScreen.Payments.route) {
-        PaymentsScreen(
-            router = router
-        )
+        PaymentsScreen()
     }
 }
 
 @Composable
-fun PaymentsScreen(
-    router: Router
-) {
+fun PaymentsScreen() {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center

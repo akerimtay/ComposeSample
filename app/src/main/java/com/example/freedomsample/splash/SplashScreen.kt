@@ -5,19 +5,21 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.freedomsample.NavigationGraph
-import com.example.freedomsample.Screen
+import com.example.freedomsample.auth.authGraphRoute
 import com.example.freedomsample.navigation.Router
 import kotlinx.coroutines.delay
+
+const val splashGraphRoute = "graph_splash"
+const val splashScreenRoute = "splash"
 
 fun NavGraphBuilder.splashNavGraph(
     router: Router,
 ) {
     navigation(
-        route = NavigationGraph.Splash.route,
-        startDestination = Screen.Splash.route
+        route = splashGraphRoute,
+        startDestination = splashScreenRoute,
     ) {
-        composable(Screen.Splash.route) {
+        composable(splashScreenRoute) {
             SplashScreen(
                 onResult = { route ->
                     router.routeTo(screen = route)
@@ -33,6 +35,6 @@ fun SplashScreen(
 ) {
     LaunchedEffect(Unit) {
         delay(500)
-        onResult.invoke(NavigationGraph.Auth.route)
+        onResult.invoke(authGraphRoute)
     }
 }

@@ -12,29 +12,32 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.example.freedomsample.NavigationGraph
-import com.example.freedomsample.Screen
 import com.example.freedomsample.navigation.Router
+import com.example.freedomsample.tabs.ui.tabsGraphRoute
+
+const val authGraphRoute = "graph_auth"
+const val loginScreenRoute = "login"
+const val confirmScreenRoute = "confirm"
 
 fun NavGraphBuilder.authNavGraph(
     router: Router,
     navController: NavController,
 ) {
     navigation(
-        route = NavigationGraph.Auth.route,
-        startDestination = Screen.Login.route
+        route = authGraphRoute,
+        startDestination = loginScreenRoute,
     ) {
-        composable(Screen.Login.route) {
+        composable(loginScreenRoute) {
             LoginScreen(
                 navigateToConfirm = {
-                    navController.navigate(Screen.Confirm.route)
+                    navController.navigate(confirmScreenRoute)
                 }
             )
         }
-        composable(Screen.Confirm.route) {
+        composable(confirmScreenRoute) {
             ConfirmScreen(
                 onSignIn = {
-                    router.routeTo(NavigationGraph.Tabs.route)
+                    router.routeTo(tabsGraphRoute)
                 }
             )
         }

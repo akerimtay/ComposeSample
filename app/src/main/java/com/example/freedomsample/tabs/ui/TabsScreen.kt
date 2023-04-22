@@ -9,26 +9,26 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.freedomsample.NavigationGraph
 import com.example.freedomsample.chats.chatsScreen
 import com.example.freedomsample.expenses.expensesScreen
-import com.example.freedomsample.navigation.Router
 import com.example.freedomsample.payments.paymentsScreen
 import com.example.freedomsample.product.productsScreen
 import com.example.freedomsample.tabs.BottomBar
 import com.example.freedomsample.tabs.model.BottomBarScreen
 
+const val tabsGraphRoute = "graph_tabs"
+
 fun NavGraphBuilder.tabsScreen(
-    router: Router
+    hostNavController: NavHostController,
 ) {
-    composable(route = NavigationGraph.Tabs.route) {
-        TabsScreen(router = router)
+    composable(route = tabsGraphRoute) {
+        TabsScreen(hostNavController = hostNavController)
     }
 }
 
 @Composable
 fun TabsScreen(
-    router: Router
+    hostNavController: NavHostController,
 ) {
     val navController = rememberNavController()
     Scaffold(
@@ -37,7 +37,7 @@ fun TabsScreen(
         TabsNavGraph(
             modifier = Modifier.padding(innerPadding),
             navController = navController,
-            router = router,
+            hostNavController = hostNavController,
         )
     }
 }
@@ -46,16 +46,16 @@ fun TabsScreen(
 fun TabsNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    router: Router,
+    hostNavController: NavHostController,
 ) {
     NavHost(
         modifier = modifier,
         navController = navController,
         startDestination = BottomBarScreen.Products.route,
     ) {
-        productsScreen(router = router)
-        paymentsScreen(router = router)
-        expensesScreen(router = router)
-        chatsScreen(router = router)
+        productsScreen()
+        paymentsScreen()
+        expensesScreen()
+        chatsScreen(hostNavController = hostNavController)
     }
 }
