@@ -34,28 +34,15 @@ fun TabsScreen(
     Scaffold(
         bottomBar = { BottomBar(navController = navController) }
     ) { innerPadding ->
-        TabsNavGraph(
+        NavHost(
             modifier = Modifier.padding(innerPadding),
             navController = navController,
-            hostNavController = hostNavController,
-        )
-    }
-}
-
-@Composable
-fun TabsNavGraph(
-    modifier: Modifier = Modifier,
-    navController: NavHostController,
-    hostNavController: NavHostController,
-) {
-    NavHost(
-        modifier = modifier,
-        navController = navController,
-        startDestination = BottomBarScreen.Products.route,
-    ) {
-        productsScreen()
-        paymentsScreen()
-        expensesScreen()
-        chatsScreen(hostNavController = hostNavController)
+            startDestination = BottomBarScreen.Products.route,
+        ) {
+            productsScreen()
+            paymentsScreen()
+            expensesScreen()
+            chatsScreen(hostNavController = hostNavController)
+        }
     }
 }

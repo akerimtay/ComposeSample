@@ -15,6 +15,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
+
+private const val baseUrl = "https://www.freedom.kz"
 
 const val argChatId = "chat_id"
 const val chatDetail = "chat_detail"
@@ -32,7 +35,8 @@ fun NavGraphBuilder.chatDetailScreen(
         route = routeChatDetailScreen,
         arguments = listOf(
             navArgument(argChatId) { type = NavType.StringType },
-        )
+        ),
+        deepLinks = listOf(navDeepLink { uriPattern = "$baseUrl/{$argChatId}" })
     ) { backStackEntry ->
         val chatId = backStackEntry.arguments?.getString(argChatId)
             ?: throw IllegalArgumentException("You should pass $argChatId")
